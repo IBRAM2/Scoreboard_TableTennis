@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "Libreria_Marcador")(type "KiCad")(uri "${KIPRJMOD}/Libreria_Marcador.kicad_sym")(options "")(descr ""))
+)
