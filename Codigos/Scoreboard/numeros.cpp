@@ -9,6 +9,9 @@
 #define DESPLAZAMIENTO2 3
 #define POS_INI 6
 
+#define TAM_NUM_COL_SET 4
+#define POS_INI_SET 2
+
 //Fila vacía
 static uint8_t empty_col[2] = {B00000000,B00000000};
 
@@ -84,6 +87,71 @@ static uint8_t number_map[10][5][2] =
     {B00010000,B10001000},
     {B00010000,B10001000},
     {B00001111,B00010000}
+  }
+};
+
+//Mapeado de sets
+static uint8_t set_map[10][4] = 
+{
+  { // CERO
+    B00111110,
+    B01000001,
+    B01000001,
+    B00111110
+  },
+  { // UNO
+    B00000001,
+    B01111111,
+    B01000001,
+    B00000001
+  },
+  { // DOS
+    B00110001,
+    B01001001,
+    B01000101,
+    B00100011
+  },
+  { // TRES
+    B00110110,
+    B01001001,
+    B01001001,
+    B00100010
+  },
+  { // CUATRO
+    B01111111,
+    B00100100,
+    B00010100,
+    B00001100
+  },
+  { // CINCO
+    B01001110,
+    B01010001,
+    B01010001,
+    B01110010
+  },
+  { // SEIS
+    B00100110,
+    B01001001,
+    B01001001,
+    B00111110
+  },
+  { // SIETE
+    B01110000,
+    B01001000,
+    B01000100,
+    B01000011
+  },
+  { // OCHO
+    B00110110,
+    B01001001,
+    B01001001,
+    B00110110
+  },
+  { // NUEVE
+    B00111110,
+    B01001001,
+    B01001001,
+    B00110010
   }
 };
 
@@ -190,6 +258,57 @@ void Numero(int number, int colMat[2][2], MD_MAX72XX &mxObj)
       }
     }
   }
+}
+
+//Función para subir los sets
+//*********************************************************************************
+void Sets(int sets, int colMat[2], uint8_t player, MD_MAX72XX &mxObj)
+{  
+  //Si el numero a escribir es menor a 10
+  //-------------------------------------------------------------------------------
+  if(sets>=0 && sets<10)
+  {
+    //Inicializa contador
+    int cont = 0;
+
+    //For para recorrer las columnas de las primeras matrices
+    for(int i=0; i<8; i++)
+    {
+      if(i < POS_INI_SET || i >= POS_INI_SET+TAM_NUM_COL_SET)
+      {
+        mxObj.setRow(colMat[player], i, empty_col[0]);
+      }
+      else
+      {
+        mxObj.setRow(colMat[player], i, set_map[sets][cont]);
+        cont = cont+1;
+      }
+    }
+  } 
+  //Si el numero a escribir es mayor a 9
+  //-------------------------------------------------------------------------------
+  else if(sets >= 10)
+  {
+    int decenas = sets/10;
+    int unidades = sets%10;
+    int cont = 0;
+    int cont2 = 0;
+
+    //For para recorrer las columnas de las primeras matrices
+    for(int i=0; i<8; i++)
+    {
+      if(i<4)
+      {
+        mxObj.setRow(colMat[player], i, set_map[unidades][cont]);
+        cont = cont+1;
+      }
+      else
+      {
+        mxObj.setRow(colMat[player], i, set_map[decenas][cont2]);
+        cont2 = cont2+1;
+      }
+    }
+  } 
 }
 
 //Función para dibujar servicio

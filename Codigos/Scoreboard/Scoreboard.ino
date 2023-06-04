@@ -1,7 +1,7 @@
 //*********Marcador Ping pong Profesional****************
 //Creditos:
 //Iván Ibrahim Fernández Morales
-//Luis Roberto Villa
+//Luis Roberto Villa Salas
 //Hector Varela Santos
 
 #include <MD_MAX72xx.h>
@@ -13,7 +13,7 @@
 #define SCK 13
 #define SS 10
 //Numero de matrices
-#define NUM_MAT 8
+#define NUM_MAT 10
 
 //Instancia objeto
 MD_MAX72XX mxObj = MD_MAX72XX(MD_MAX72XX::GENERIC_HW, SS, NUM_MAT);
@@ -21,6 +21,7 @@ MD_MAX72XX mxObj = MD_MAX72XX(MD_MAX72XX::GENERIC_HW, SS, NUM_MAT);
 //Mapea matrices a utilizar
 int colMat_1[2][2] = {{5,1},{4,0}};
 int colMat_2[2][2] = {{7,3},{6,2}};
+int colMat_3[2] = {8,9};
 
 //Mapeo de servicios
 uint8_t S_Singles[4] = {1,2,1,2};
@@ -35,11 +36,13 @@ uint8_t B_SV = 5;
 //Inicializa contadores
 uint8_t contL = 0;
 uint8_t contV = 0;
+uint8_t contSetL = 0;
+uint8_t contSetV = 0;
 uint8_t contS = 0;
 uint8_t suma = 0;
 
 //Inicializa variables de singles o dobles
-bool Doubles = 0;
+bool Doubles = 1;
 
 //Setup
 //*****************************************************************************
@@ -68,6 +71,9 @@ void setup() {
   Numero(contV, colMat_2, mxObj);
   //Inicializa Sacador
   Servicio(Serve[contS], mxObj);
+  //Inicializa Sets
+  Sets(contSetL, colMat_3, 0, mxObj);
+  Sets(contSetV, colMat_3, 1, mxObj);
 }
 
 //Ciclo plrincipal
@@ -81,7 +87,10 @@ void loop()
     suma = contL+contV;
     asignaServicio(Serve, &contS, suma);
     if(contL >= 11 && contL-2 >= contV)
+    {
       Victoria(1, &contL, &contV, &contS, Serve);
+      subeSet(&contSetL, 0);
+    }
     delay(500);
   }
 
@@ -92,7 +101,10 @@ void loop()
     suma = contL+contV;
     asignaServicio(Serve, &contS, suma);
     if(contV >= 11 && contV-2 >= contL)
+    {
       Victoria(2, &contL, &contV, &contS, Serve);
+      subeSet(&contSetV, 1);
+    }
     delay(500);
   }
 }
@@ -114,6 +126,14 @@ void subeVisita(uint8_t *contV)
 {
   *contV = *contV+1;
   Numero(*contV, colMat_2, mxObj);
+}
+
+//Función para subir set
+//---------------------------------------------------------------
+void subeSet(uint8_t *cont, uint8_t player)
+{
+  *cont = *cont+1;
+  Sets(*cont, colMat_3, player, mxObj);
 }
 
 //Función para conocer sacador
