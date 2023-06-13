@@ -11,7 +11,7 @@
 //Defiine pines SPI
 #define MOSI 11
 #define SCK 13
-#define SS 10
+#define SS 8
 //Numero de matrices
 #define NUM_MAT 10
 

@@ -1,4 +1,4 @@
 (fp_lib_table
   (version 7)
-  (lib (name "Scoreboard")(type "KiCad")(uri "C:/Users/Ibrahim/Google Drive/Marcador ping/Github/Kicad/Footprints/Scoreboard.pretty")(options "")(descr ""))
+  (lib (name "Scoreboard")(type "KiCad")(uri "C:/Users/the_y/Google Drive/Marcador ping/Github/Kicad/Footprints/Scoreboard.pretty")(options "")(descr ""))
 )
