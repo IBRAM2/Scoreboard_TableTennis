@@ -36,6 +36,8 @@
 #define B5 987.77
 #define C6 1046.50
 
+
+//******MAPEOS****************************************************************************************************************
 const double starfox[][2] = {
   {D4, 0.5},{D5, 0.5},{C5, 2},{B4, 0.3},{A4, 0.33},{B4, 0.34},{0, 0.33},{G4, 0.67},{G5, 3},{Fs5, 0.33},{Fs5, 0.33},{Fs5, 0.34},{G5, 0.5},{G4, 0.5}
 };
@@ -92,13 +94,21 @@ const double BPM[13] = {
   150,150,260,120,170,150,150,150,120,150,120,230,120
 };
 
+//***FUNCIÓN********************************************************************************************************************
 void play(int numero){
-  Serial.begin(115200);
+  // Serial.begin(115200);
 
   int arrSize = 0;
   switch(numero){
     case 0:
-      arrSize = sizeof(starfox) / sizeof(starfox[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[0] * starfox[thisNote][1];tone(9, starfox[thisNote][0], noteDuration);int pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
+      arrSize = sizeof(starfox) / sizeof(starfox[0]);
+        for(int thisNote = 0; thisNote < arrSize; thisNote++)
+        {
+          double noteDuration = 60000 / BPM[0] * starfox[thisNote][1];
+          tone(9, starfox[thisNote][0], noteDuration);
+          int pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);
+          noTone(8);
+        }
       break;
     case 1:
       arrSize = sizeof(mario) / sizeof(mario[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[1] * mario[thisNote][1];tone(9, mario[thisNote][0], noteDuration);int pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
@@ -115,25 +125,25 @@ void play(int numero){
     case 5:
       arrSize = sizeof(zelda) / sizeof(zelda[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[5] * zelda[thisNote][1];tone(9, zelda[thisNote][0], noteDuration);int pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
       break;
+    // case 6:
+    // //   arrSize = sizeof(smash) / sizeof(smash[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[6] * smash[thisNote][1];tone(9, smash[thisNote][0], noteDuration);double pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
+    //   break;
     case 6:
-    //   arrSize = sizeof(smash) / sizeof(smash[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[6] * smash[thisNote][1];tone(9, smash[thisNote][0], noteDuration);double pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
-      break;
-    case 7:
       arrSize = sizeof(yoshi) / sizeof(yoshi[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[7] * yoshi[thisNote][1];tone(9, yoshi[thisNote][0], noteDuration);double pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
       break;
-    case 8:
+    case 7:
       arrSize = sizeof(metroid) / sizeof(metroid[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[8] * metroid[thisNote][1];tone(9, metroid[thisNote][0], noteDuration);double pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
       break;
-    case 9:
+    case 8:
       arrSize = sizeof(fireemblem) / sizeof(fireemblem[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[9] * fireemblem[thisNote][1];tone(9, fireemblem[thisNote][0], noteDuration);int pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
-      break;
-    case 10:
-    //   arrSize = sizeof(duckhunt) / sizeof(duckhunt[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[10] * duckhunt[thisNote][1];tone(9, duckhunt[thisNote][0], noteDuration);double pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);Serial.println("Duracion: ");Serial.println(noteDuration);}
-      break;
-    case 11:
-    //   arrSize = sizeof(kingkrool) / sizeof(kingkrool[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[11] * kingkrool[thisNote][1];tone(9, kingkrool[thisNote][0], noteDuration);double pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);Serial.println("Duracion: ");Serial.println(noteDuration);}
-      break;
-    case 12:
+    //   break;
+    // case 10:
+    // //   arrSize = sizeof(duckhunt) / sizeof(duckhunt[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[10] * duckhunt[thisNote][1];tone(9, duckhunt[thisNote][0], noteDuration);double pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);Serial.println("Duracion: ");Serial.println(noteDuration);}
+    //   break;
+    // case 11:
+    // //   arrSize = sizeof(kingkrool) / sizeof(kingkrool[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[11] * kingkrool[thisNote][1];tone(9, kingkrool[thisNote][0], noteDuration);double pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);Serial.println("Duracion: ");Serial.println(noteDuration);}
+    //   break;
+    case 9:
       arrSize = sizeof(dragonquest) / sizeof(dragonquest[0]);for(int thisNote = 0; thisNote < arrSize; thisNote++){double noteDuration = 60000 / BPM[12] * dragonquest[thisNote][1];tone(9, mario[thisNote][0], noteDuration);int pauseBetweenNotes = noteDuration * 1.05;delay(pauseBetweenNotes);noTone(8);}
       break;
     default:

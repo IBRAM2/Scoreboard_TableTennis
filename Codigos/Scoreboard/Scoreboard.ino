@@ -8,10 +8,11 @@
 #include <SPI.h>
 #include "numeros.h"  // Librería pa dibujar los numeros en la matriz
 
-//Defiine pines SPI
+//Define pines SPI
 #define MOSI 11
 #define SCK 13
 #define SS 8
+#define BUZZ_ACT 7
 //Numero de matrices
 #define NUM_MAT 10
 
@@ -65,6 +66,10 @@ void setup() {
   pinMode(B_SL, INPUT);
   //Botón marcador visitante
   pinMode(B_SV, INPUT);
+  
+  //Pin de activación de victoria (Buzzer)
+  pinMode(BUZZ_ACT, OUTPUT);
+  digitalWrite(BUZZ_ACT, LOW);
 
   //Lee entrada digital de selección de sobles o singles
   Doubles = digitalRead(B_SD);
@@ -185,7 +190,10 @@ void asignaServicio(uint8_t Serve[4], uint8_t *contS, uint8_t suma)
 //---------------------------------------------------------------
 void Victoria(uint8_t team, uint8_t *contL, uint8_t *contV, uint8_t *contS, uint8_t Serve[4])
 {
-  delay(3000);
+  digitalWrite(BUZZ_ACT, HIGH);
+  delay(300);
+  digitalWrite(BUZZ_ACT, LOW);
+  delay(5000);
   *contL = 0;
   *contV = 0;
   *contS = 0;
